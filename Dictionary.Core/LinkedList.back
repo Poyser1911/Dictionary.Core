@@ -1,0 +1,258 @@
+#ifndef LinkedList_h
+#define LinkedList_h
+
+#include <fstream>
+#include "Enums.h"
+#include <cstdarg>
+#include <string>
+#include <regex>
+#include "Ut.h"
+
+template <class T>
+ref class LinkedList
+{
+private:
+	int Count;
+	T* head;
+
+public:
+
+	LinkedList()
+	{
+		this->head  = NULL;
+		this->Count = 0;
+	}
+
+	LinkedList(T head)
+	{
+		this->head = new T(head);
+		Count = 1;
+	}
+
+	~LinkedList()
+	{
+		//DestroyList();
+	}
+
+	void AddNode(T n,Position at = Position::Back)
+	{	
+		T* node = new T(n);
+		if(head == NULL)
+		{
+			head = node;
+			Count++;
+			return;
+		}
+		T* temp = head;
+		if(at == Position::Front)
+		{
+			node->SetNextNode(temp);
+			head = node;
+			Count++;
+			return;
+		}
+
+		int count = 1;
+		while(temp->GetNextNode() != NULL)
+		{
+			if(at == Position::Middle)
+			{
+				if(count == Count/2)
+				{
+					node->SetNextNode(temp->GetNextNode());
+					temp->SetNextNode(node);
+					break;
+				}
+				count++;
+			}
+			temp = temp->GetNextNode();
+		}
+
+		temp->SetNextNode(node);
+		Count++;
+	}
+	void static LoadFromFile(int NumofFiles,...)
+	{
+
+		T* temp = head;
+		if(head != NULL)
+			while(temp->GetNextNode() != NULL)
+				temp = temp->GetNextNode();
+
+		string line; 
+		va_list filenames;
+
+		va_start(filenames, NumofFiles);
+		for(int i=0;i<NumofFiles;i++)
+		{
+			ifstream file(va_arg(filenames,string)+".txt");
+			while (getline(file, line))
+			{
+				if(head == NULL)
+				{
+					head = new Word(Word::GetWord(line.c_str()));
+					Count++;
+					temp = head;
+					continue;
+				}
+				temp->SetNextNode(new Word(Word::GetWord(line.c_str())));
+				temp = temp->GetNextNode();
+				Count++;
+			}
+		}
+	}
+
+	int GetCount()
+	{
+		return this->Count;
+	}
+	void Sort()
+	{
+		MergeSort(&head);
+	}
+
+	void MergeSort(T** headRef)
+	{
+		T* head = *headRef;
+		T* a;
+		T* b;
+
+		if ((head == NULL) || (head->GetNextNode() == NULL))
+			return;
+
+		FrontBackSplit(head, &a, &b); 
+		MergeSort(&a);
+		MergeSort(&b);
+		*headRef = SortedMerge(a, b);
+	}
+	T* SortedMerge(T* a, T* b)
+	{
+		T* result = NULL;
+
+		if (a == NULL)
+			return(b);
+		else if (b==NULL)
+			return(a);
+
+
+		if (a->GetName() < b->GetName())
+		{
+			result = a;
+			result->SetNextNode(SortedMerge(a->GetNextNode(), b));
+		}
+		else if (a->GetName() == b->GetName())
+		{
+			result = a;
+			result->SetNextNode(SortedMerge(a->GetNextNode(), b->GetNextNode()));
+		}
+		else
+		{
+			result = b;
+			result->SetNextNode(SortedMerge(a, b->GetNextNode()));
+		}
+		return(result);
+	}
+	void FrontBackSplit(T* source,
+		T** frontRef, T** backRef)
+	{
+		T* fast;
+		T* slow;
+		if (source==NULL || source->GetNextNode()==NULL)
+		{
+			*frontRef = source;
+			*backRef = NULL;
+		}
+		else
+		{
+			slow = source;
+			fast = source->GetNextNode();
+
+			while (fast != NULL)
+			{
+				fast = fast->GetNextNode();
+				if (fast != NULL)
+				{
+					slow = slow->GetNextNode();
+					fast = fast->GetNextNode();
+				}
+			}
+			*frontRef = source;
+			*backRef = slow->GetNextNode();
+			slow->SetNextNode(NULL);
+		}
+	}
+	void PrintAll()
+	{
+		T *temp = head;
+		while (temp != NULL)
+		{
+			cout << temp->GetValue() << endl;
+			temp = temp->GetNextNode();
+		}
+	}
+	template<typename U>
+	U ToString()
+	{
+		U result = "";
+		T *temp = head;
+		while (temp != NULL)
+		{
+			result += temp->GetValue() + " ";
+			temp = temp->GetNextNode();
+		}
+		return result;
+	}
+	T* FindWord(string WordName, bool display = false)
+	{
+		WordName = Ut::ToLower((WordName));
+		if(head == NULL)
+			return NULL;
+
+		T* temp = head;
+		while(temp->GetNextNode() != NULL)
+		{
+			if(Ut::ToLower((temp->GetName())) == WordName)
+			{
+				if(display)
+					cout << temp->GetValue() << endl;
+				return temp;
+			}
+			temp = temp->GetNextNode();
+		}
+		return NULL;
+	}
+	void AddWord(T word, bool AutoSort = false)
+	{
+		if(head == NULL)
+		{
+			head = new T(word);
+			return;
+		}
+		T* temp = new T(word);
+		temp->SetNextNode(head);
+		head = temp;
+		if(AutoSort)
+			Sort();
+		return;
+
+	}
+	string ValidateSentence(string sentence)
+	{
+		smatch match;
+		string result = "";
+		while(regex_search(sentence,match,regex("\\w+")))
+		{
+			for(auto m : match)
+				if(this->FindWord(m) == NULL)
+					result += m.str()+",";
+			sentence = match.suffix().str();
+		}
+		return result.length() != 0 ? result.substr(0,result.length()-1) : result;
+	}
+	//void RemoveAt(int);
+	//void UpdateNode(int,T);
+	//void DestroyList();
+	//void DisplayAll();
+	//int GetCount();
+};
+#endif
