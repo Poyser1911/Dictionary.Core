@@ -47,4 +47,3 @@ int mainn()
 	system("pause");
 	return 0;
 }
-

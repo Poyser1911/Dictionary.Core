@@ -1,10 +1,10 @@
 #ifndef Ut_h
 #define Ut_h
 
-#include<string>
 #include <msclr\marshal_cppstd.h>
 #include <locale>
 using namespace std;
+using namespace System::Windows::Forms;
 using namespace System::IO;
 class Ut
 {
@@ -18,6 +18,7 @@ public:
 			start_pos += to.length();
 		}
 	}
+
 	static string ToLower(string s)
 	{
 		std::locale loc;
@@ -26,6 +27,7 @@ public:
 			r += tolower(elem,loc);
 		return r;
 	}
+
 	static System::String^ ToStringHat(const char *c)
 	{
 		size_t cSize = strlen(c)+1;
@@ -35,10 +37,12 @@ public:
 		delete wc;
 		return r;
 	}
+
 	static string FromStringHat(System::String^ string)
 	{
 		return msclr::interop::marshal_as<std::string>(string);
 	}
+
 	static string ReadAllText(string filename)
 	{
 		System::String^ file = Ut::ToStringHat(filename.c_str());
@@ -47,13 +51,15 @@ public:
 		else
 			return string("");
 	}
-	static System::Windows::Forms::DialogResult Error(System::String^ errorstr,System::Windows::Forms::MessageBoxButtons buttons = System::Windows::Forms::MessageBoxButtons::OK)
+
+	static DialogResult Error(System::String^ errorstr,MessageBoxButtons buttons = MessageBoxButtons::OK)
 	{
-		return System::Windows::Forms::MessageBox::Show(errorstr,"Dictionary Error",buttons,System::Windows::Forms::MessageBoxIcon::Error);
+		return MessageBox::Show(errorstr,"Dictionary Error",buttons,MessageBoxIcon::Error);
 	}
-	static System::Windows::Forms::DialogResult Info(System::String^ errorstr,System::Windows::Forms::MessageBoxButtons buttons = System::Windows::Forms::MessageBoxButtons::OK)
+
+	static DialogResult Info(System::String^ errorstr,MessageBoxButtons buttons = MessageBoxButtons::OK,MessageBoxIcon icon = MessageBoxIcon::Information)
 	{
-		return System::Windows::Forms::MessageBox::Show(errorstr,"Dictionary Info",buttons,System::Windows::Forms::MessageBoxIcon::Information);
+		return MessageBox::Show(errorstr,"Dictionary Info",buttons,icon);
 	}
 };
 

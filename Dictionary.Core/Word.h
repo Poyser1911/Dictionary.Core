@@ -1,12 +1,8 @@
 #ifndef Word_h
 #define Word_h
 
-#include <string>
 #include "Node.h"
-#include "LinkedList.h"
 #include "PoSList.h"
-#include "PartofSpeach.h"
-#include "Ut.h"
 #include <regex>
 
 using namespace std;
@@ -76,6 +72,8 @@ public:
 	static Word GetWord(string line)
 	{
 		Word word;
+		try
+		{
 		smatch match;
 		regex_search(line,match,regex("[A-z/]+"));
 		word.Name = match[0];
@@ -96,7 +94,8 @@ public:
 				word.PartofS.AddPoS(m);
 			line = match.suffix().str();
 		}
-
+		}
+		catch(exception) {}
 		return word;
 	}
 };

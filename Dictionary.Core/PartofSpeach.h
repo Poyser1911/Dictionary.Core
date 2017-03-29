@@ -1,8 +1,7 @@
 
 #ifndef PartofSpeach_h
 #define PartofSpeach_h
-#include "Node.h"
-#include <string>
+
 using namespace std;
 
 class PartofSpeach : public Node<PartofSpeach,string>

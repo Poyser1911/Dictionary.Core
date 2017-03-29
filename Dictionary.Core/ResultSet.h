@@ -1,6 +1,6 @@
 #ifndef ResetSet_h
 #define ResetSet_h
-#include <time.h>
+
 template<typename T>
 class ResultSet
 {
@@ -14,7 +14,6 @@ public:
 	T result;
 	ResultSet()
 	{
-		T result();
 		index = 0;
 		time = 0.00F;
 		Start = clock();
@@ -23,7 +22,7 @@ public:
 	{
 
 		this->End=clock()-this->Start;
-		time = (double)End / ((double)CLOCKS_PER_SEC);
+		time = (float)End / ((float)CLOCKS_PER_SEC);
 	}
 	void IncrementIndex()
 	{

@@ -1,79 +1,118 @@
 #ifndef ConfigM_h
 #define ConfigM_h
-#include "rapidjson/document.h"
-#include "rapidjson/writer.h"
-#include "rapidjson/stringbuffer.h"
-#include <iostream>
 
 using namespace rapidjson;
-using namespace std;
 using namespace System::IO;
 using namespace System;
-class ConfigManager
-{
-private:
-	string filename;
-	Document doc;
-	int NumOfFiles;
-public:
-	ConfigManager(String^ filename = "conf.json")
-	{
-		//Prevent / and \ confusion//
-		//Prevent searching else-where when debugging//
-		if(!filename->Replace('/','\\')->Contains("\\"))
-			filename = System::AppDomain::CurrentDomain->BaseDirectory+"/"+filename;
 
-		if(!File::Exists(filename))
+namespace DictionaryCore {
+	class ConfigManager
+	{
+	private:
+		string filename;
+		Document doc;
+		int NumOfFiles;
+
+		void CheckFile(String^ filename)
 		{
-			if(Ut::Info("Configuration File Not Found, Create now?",System::Windows::Forms::MessageBoxButtons::OKCancel) == System::Windows::Forms::DialogResult::OK)
-				File::WriteAllText(filename,"{\"filenames\":[]}");
+			if(!File::Exists(filename))
+			{
+				if(Ut::Info("Configuration File Not Found, Create now?",System::Windows::Forms::MessageBoxButtons::OKCancel,MessageBoxIcon::Question) == System::Windows::Forms::DialogResult::OK)
+					CreateNew(filename);
+				else
+					System::Environment::Exit(1);
+			}
 			else
-				System::Environment::Exit(1);
+			{
+				try
+				{
+					string data = Ut::ReadAllText(this->filename);
+					if (doc.Parse(data.c_str()).HasParseError()) {
+						char buff[120];
+						sprintf_s(buff, "\nError(offset %u)\n",(unsigned)doc.GetErrorOffset());
+						string errormsg(buff);
+						throw gcnew Exception("Could not parse "+filename+", "+Ut::ToStringHat(errormsg.c_str()));
+					}
+					else
+					{
+						if(!doc.HasMember("filenames"))
+							throw gcnew Exception("Could not parse "+filename+", 'filenames[]' is not defined");
+					}
+				}
+				catch(Exception^ e)
+				{
+					if(Ut::Info(e->Message+"\nCreate New?",System::Windows::Forms::MessageBoxButtons::OKCancel,MessageBoxIcon::Question) == System::Windows::Forms::DialogResult::OK)
+						CreateNew(filename);
+					else
+						System::Environment::Exit(1);
+				}
+			}
 		}
-
-		this->filename = Ut::FromStringHat(filename);
-		NumOfFiles = 0;
-		Reload();
-	}
-	Value& GetFileNames()
-	{
-		return this->doc["filenames"];
-	}
-	int GetNumOFFiles()
-	{
-		return this->NumOfFiles;
-	}
-	void Reload()
-	{
-		string data = Ut::ReadAllText(this->filename);
-		NumOfFiles = 0;
-		if(data != "")
+		void GetFileNamesFromJson()
 		{
-			doc.Parse(data.c_str());
+			NumOfFiles = 0;
 			Value& filenames = doc["filenames"];
+
 			for(rapidjson::SizeType i = 0;i<filenames.Size();i++)
 				NumOfFiles++;
 		}
-	}
-	void AddFileName(System::String^ filename)
-	{
-		Value& filenames = doc["filenames"];
-		Value str;
-		str.SetString(Ut::FromStringHat(filename).c_str(), doc.GetAllocator());
-		filenames.PushBack(str, doc.GetAllocator()); 
-		NumOfFiles++;
-	}
-	void Save()
-	{
-		if(NumOfFiles == 0)
-			return;
-		StringBuffer buffer;
-		Writer<StringBuffer> writer(buffer);
-		doc.Accept(writer);
+		void CreateNew(String^ filename)
+		{
+			try
+			{
+				File::WriteAllText(filename,"{\"filenames\":[]}");
+				Ut::Info(filename+" Created Sucessfully");
+				CheckFile(filename);
+			}
+			catch(Exception^ e)
+			{
+				Ut::Error(e->Message);
+				System::Environment::Exit(1);
+			}
+		}
+	public:
+		ConfigManager(String^ filename = "conf.json")
+		{
+			//Prevent / and \ confusion//
+			//Prevent searching else-where when debugging//
+			if(!filename->Replace('/','\\')->Contains("\\"))
+				filename = System::AppDomain::CurrentDomain->BaseDirectory+"\\"+filename;
 
-		File::WriteAllText(Ut::ToStringHat(this->filename.c_str()),Ut::ToStringHat(buffer.GetString()));
-	}
+			this->filename = Ut::FromStringHat(filename);
 
-};
+			//Check File - Create if Not Exist,Load & Check Json//
+			CheckFile(filename);
 
+			GetFileNamesFromJson();
+		}
+
+		Value& GetFileNames()
+		{
+			return this->doc["filenames"];
+		}
+		int GetNumOFFiles()
+		{
+			return this->NumOfFiles;
+		}
+		void AddFileName(System::String^ filename)
+		{
+			Value& filenames = doc["filenames"];
+			Value str;
+			str.SetString(Ut::FromStringHat(filename).c_str(), doc.GetAllocator());
+			filenames.PushBack(str, doc.GetAllocator()); 
+			NumOfFiles++;
+		}
+		void Save()
+		{
+			if(NumOfFiles == 0)
+				return;
+			StringBuffer buffer;
+			Writer<StringBuffer> writer(buffer);
+			doc.Accept(writer);
+
+			File::WriteAllText(Ut::ToStringHat(this->filename.c_str()),Ut::ToStringHat(buffer.GetString()));
+		}
+
+	};
+}
 #endif
