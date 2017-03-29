@@ -35,8 +35,11 @@ public:
 		}
 		catch(WebException^ e)
 		{
+			//If Word not found
+			if(e->Message->Contains("404"))
+				return "";
 			if(DisplayErrors)
-				if(Ut::Error(e->Message+"\nDon't Show Again?") == DialogResult::OK)
+				if(Ut::Error(e->Message+"\nDon't Show Again?", MessageBoxButtons::OKCancel) == DialogResult::OK)
 					DisplayErrors = false;
 			return "";
 		}
@@ -44,6 +47,8 @@ public:
 	String^ GetSampleDefinition(String^ wordname)
 	{
 		string data = Ut::FromStringHat(GetJSONString(wordname));
+		if(data == "")
+			return "";
 		Document doc;
 		doc.Parse(data.c_str());
 		string result = doc["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["definitions"][0].GetString();

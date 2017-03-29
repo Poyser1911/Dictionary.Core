@@ -5,6 +5,11 @@ ehthumbs.db
 # Folder config file
 Desktop.ini
 
+#Custom
+Debug/
+Dictionary.Core/Debug/
+*.opensdf
+*.sdf
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 

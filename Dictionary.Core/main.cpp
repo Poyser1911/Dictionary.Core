@@ -2,7 +2,7 @@
 #include <iostream>
 #include "LinkedList.h"
 #include "Word.h"
-#include "Timer.h"
+//#include "Timer.h"
 #include <string>
 
 int mainn()
