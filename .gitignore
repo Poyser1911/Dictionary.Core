@@ -8,6 +8,7 @@ Desktop.ini
 #Custom
 Debug/
 Dictionary.Core/Debug/
+Dictionary.Core/Release/
 *.opensdf
 *.sdf
 # Recycle Bin used on file shares
