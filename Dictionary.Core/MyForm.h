@@ -7,6 +7,7 @@
 #include "Word.h"
 #include "ManagedAddWord.h"
 #include "ConfigManager.h"
+#include "Api.h"
 
 using namespace System;
 using namespace System::IO;
@@ -276,7 +277,7 @@ namespace DictionaryCore {
 				static_cast<System::Byte>(0)));
 			this->parse_time->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(15)), static_cast<System::Int32>(static_cast<System::Byte>(190)), 
 				static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			this->parse_time->Location = System::Drawing::Point(422, 202);
+			this->parse_time->Location = System::Drawing::Point(422, 217);
 			this->parse_time->Name = L"parse_time";
 			this->parse_time->Size = System::Drawing::Size(223, 68);
 			this->parse_time->TabIndex = 4;
@@ -291,7 +292,7 @@ namespace DictionaryCore {
 				static_cast<System::Byte>(0)));
 			this->parse_run->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(15)), static_cast<System::Int32>(static_cast<System::Byte>(190)), 
 				static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			this->parse_run->Location = System::Drawing::Point(421, 94);
+			this->parse_run->Location = System::Drawing::Point(421, 109);
 			this->parse_run->Name = L"parse_run";
 			this->parse_run->Size = System::Drawing::Size(232, 124);
 			this->parse_run->TabIndex = 9;
@@ -302,10 +303,9 @@ namespace DictionaryCore {
 			// 
 			this->pictureBox2->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->pictureBox2->BackgroundImage = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox2.BackgroundImage")));
-			this->pictureBox2->Enabled = false;
 			this->pictureBox2->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox2.Image")));
 			this->pictureBox2->InitialImage = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox2.InitialImage")));
-			this->pictureBox2->Location = System::Drawing::Point(185, -82);
+			this->pictureBox2->Location = System::Drawing::Point(185, -67);
 			this->pictureBox2->Name = L"pictureBox2";
 			this->pictureBox2->Size = System::Drawing::Size(707, 528);
 			this->pictureBox2->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
@@ -346,7 +346,7 @@ namespace DictionaryCore {
 				static_cast<System::Byte>(0)));
 			this->sort_time->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(15)), static_cast<System::Int32>(static_cast<System::Byte>(190)), 
 				static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			this->sort_time->Location = System::Drawing::Point(422, 202);
+			this->sort_time->Location = System::Drawing::Point(422, 217);
 			this->sort_time->Name = L"sort_time";
 			this->sort_time->Size = System::Drawing::Size(223, 68);
 			this->sort_time->TabIndex = 19;
@@ -361,7 +361,7 @@ namespace DictionaryCore {
 				static_cast<System::Byte>(0)));
 			this->sort_run->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(15)), static_cast<System::Int32>(static_cast<System::Byte>(190)), 
 				static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			this->sort_run->Location = System::Drawing::Point(421, 94);
+			this->sort_run->Location = System::Drawing::Point(421, 109);
 			this->sort_run->Name = L"sort_run";
 			this->sort_run->Size = System::Drawing::Size(232, 124);
 			this->sort_run->TabIndex = 20;
@@ -372,10 +372,9 @@ namespace DictionaryCore {
 			// 
 			this->pictureBox1->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->pictureBox1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox1.BackgroundImage")));
-			this->pictureBox1->Enabled = false;
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox1.Image")));
 			this->pictureBox1->InitialImage = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox1.InitialImage")));
-			this->pictureBox1->Location = System::Drawing::Point(185, -82);
+			this->pictureBox1->Location = System::Drawing::Point(185, -67);
 			this->pictureBox1->Name = L"pictureBox1";
 			this->pictureBox1->Size = System::Drawing::Size(707, 528);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
@@ -451,7 +450,7 @@ namespace DictionaryCore {
 			this->search_box->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->search_box->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
-			this->search_box->Location = System::Drawing::Point(326, 403);
+			this->search_box->Location = System::Drawing::Point(326, 433);
 			this->search_box->Name = L"search_box";
 			this->search_box->Size = System::Drawing::Size(436, 29);
 			this->search_box->TabIndex = 15;
@@ -463,7 +462,7 @@ namespace DictionaryCore {
 			this->label10->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->label10->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
-			this->label10->Location = System::Drawing::Point(326, 369);
+			this->label10->Location = System::Drawing::Point(326, 399);
 			this->label10->Name = L"label10";
 			this->label10->Size = System::Drawing::Size(436, 25);
 			this->label10->TabIndex = 9;
@@ -477,7 +476,7 @@ namespace DictionaryCore {
 				static_cast<System::Byte>(0)));
 			this->search_time->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(15)), static_cast<System::Int32>(static_cast<System::Byte>(190)), 
 				static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			this->search_time->Location = System::Drawing::Point(422, 202);
+			this->search_time->Location = System::Drawing::Point(422, 217);
 			this->search_time->Name = L"search_time";
 			this->search_time->Size = System::Drawing::Size(223, 68);
 			this->search_time->TabIndex = 22;
@@ -492,7 +491,7 @@ namespace DictionaryCore {
 				static_cast<System::Byte>(0)));
 			this->search_run->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(15)), static_cast<System::Int32>(static_cast<System::Byte>(190)), 
 				static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			this->search_run->Location = System::Drawing::Point(421, 94);
+			this->search_run->Location = System::Drawing::Point(421, 109);
 			this->search_run->Name = L"search_run";
 			this->search_run->Size = System::Drawing::Size(232, 124);
 			this->search_run->TabIndex = 23;
@@ -503,10 +502,9 @@ namespace DictionaryCore {
 			// 
 			this->pictureBox3->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->pictureBox3->BackgroundImage = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox3.BackgroundImage")));
-			this->pictureBox3->Enabled = false;
 			this->pictureBox3->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox3.Image")));
 			this->pictureBox3->InitialImage = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox3.InitialImage")));
-			this->pictureBox3->Location = System::Drawing::Point(185, -82);
+			this->pictureBox3->Location = System::Drawing::Point(185, -67);
 			this->pictureBox3->Name = L"pictureBox3";
 			this->pictureBox3->Size = System::Drawing::Size(707, 528);
 			this->pictureBox3->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
@@ -565,7 +563,7 @@ namespace DictionaryCore {
 				static_cast<System::Byte>(0)));
 			this->pos_selector_run->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(15)), static_cast<System::Int32>(static_cast<System::Byte>(190)), 
 				static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			this->pos_selector_run->Location = System::Drawing::Point(185, 409);
+			this->pos_selector_run->Location = System::Drawing::Point(185, 465);
 			this->pos_selector_run->Margin = System::Windows::Forms::Padding(0);
 			this->pos_selector_run->Name = L"pos_selector_run";
 			this->pos_selector_run->Size = System::Drawing::Size(138, 34);
@@ -582,7 +580,7 @@ namespace DictionaryCore {
 				static_cast<System::Byte>(0)));
 			this->skip_run->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(15)), static_cast<System::Int32>(static_cast<System::Byte>(190)), 
 				static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			this->skip_run->Location = System::Drawing::Point(729, 363);
+			this->skip_run->Location = System::Drawing::Point(729, 419);
 			this->skip_run->Name = L"skip_run";
 			this->skip_run->Size = System::Drawing::Size(163, 34);
 			this->skip_run->TabIndex = 31;
@@ -597,7 +595,7 @@ namespace DictionaryCore {
 				static_cast<System::Byte>(0)));
 			this->add_time->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(15)), static_cast<System::Int32>(static_cast<System::Byte>(190)), 
 				static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			this->add_time->Location = System::Drawing::Point(422, 202);
+			this->add_time->Location = System::Drawing::Point(422, 217);
 			this->add_time->Name = L"add_time";
 			this->add_time->Size = System::Drawing::Size(223, 68);
 			this->add_time->TabIndex = 28;
@@ -612,7 +610,7 @@ namespace DictionaryCore {
 				static_cast<System::Byte>(0)));
 			this->add_run->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(15)), static_cast<System::Int32>(static_cast<System::Byte>(190)), 
 				static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			this->add_run->Location = System::Drawing::Point(421, 94);
+			this->add_run->Location = System::Drawing::Point(421, 109);
 			this->add_run->Name = L"add_run";
 			this->add_run->Size = System::Drawing::Size(232, 124);
 			this->add_run->TabIndex = 29;
@@ -625,7 +623,7 @@ namespace DictionaryCore {
 			this->label19->AutoSize = true;
 			this->label19->Font = (gcnew System::Drawing::Font(L"Calibri", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
-			this->label19->Location = System::Drawing::Point(59, 416);
+			this->label19->Location = System::Drawing::Point(59, 472);
 			this->label19->Name = L"label19";
 			this->label19->Size = System::Drawing::Size(121, 23);
 			this->label19->TabIndex = 25;
@@ -636,7 +634,7 @@ namespace DictionaryCore {
 			this->add_definition->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->add_definition->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
-			this->add_definition->Location = System::Drawing::Point(185, 452);
+			this->add_definition->Location = System::Drawing::Point(185, 508);
 			this->add_definition->Multiline = true;
 			this->add_definition->Name = L"add_definition";
 			this->add_definition->Size = System::Drawing::Size(707, 34);
@@ -648,7 +646,7 @@ namespace DictionaryCore {
 			this->label18->AutoSize = true;
 			this->label18->Font = (gcnew System::Drawing::Font(L"Calibri", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
-			this->label18->Location = System::Drawing::Point(95, 463);
+			this->label18->Location = System::Drawing::Point(95, 519);
 			this->label18->Name = L"label18";
 			this->label18->Size = System::Drawing::Size(86, 23);
 			this->label18->TabIndex = 23;
@@ -671,7 +669,7 @@ namespace DictionaryCore {
 			this->add_name->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->add_name->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
-			this->add_name->Location = System::Drawing::Point(185, 363);
+			this->add_name->Location = System::Drawing::Point(185, 419);
 			this->add_name->Multiline = true;
 			this->add_name->Name = L"add_name";
 			this->add_name->Size = System::Drawing::Size(307, 34);
@@ -704,7 +702,7 @@ namespace DictionaryCore {
 			this->label13->AutoSize = true;
 			this->label13->Font = (gcnew System::Drawing::Font(L"Calibri", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
-			this->label13->Location = System::Drawing::Point(125, 367);
+			this->label13->Location = System::Drawing::Point(125, 423);
 			this->label13->Name = L"label13";
 			this->label13->Size = System::Drawing::Size(55, 23);
 			this->label13->TabIndex = 16;
@@ -714,10 +712,9 @@ namespace DictionaryCore {
 			// 
 			this->pictureBox4->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->pictureBox4->BackgroundImage = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox4.BackgroundImage")));
-			this->pictureBox4->Enabled = false;
 			this->pictureBox4->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox4.Image")));
 			this->pictureBox4->InitialImage = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox4.InitialImage")));
-			this->pictureBox4->Location = System::Drawing::Point(185, -85);
+			this->pictureBox4->Location = System::Drawing::Point(185, -67);
 			this->pictureBox4->Name = L"pictureBox4";
 			this->pictureBox4->Size = System::Drawing::Size(707, 528);
 			this->pictureBox4->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
@@ -851,7 +848,7 @@ namespace DictionaryCore {
 			this->validate_box->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->validate_box->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
-			this->validate_box->Location = System::Drawing::Point(185, 403);
+			this->validate_box->Location = System::Drawing::Point(185, 432);
 			this->validate_box->Name = L"validate_box";
 			this->validate_box->Size = System::Drawing::Size(707, 29);
 			this->validate_box->TabIndex = 28;
@@ -863,7 +860,7 @@ namespace DictionaryCore {
 			this->label7->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->label7->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
-			this->label7->Location = System::Drawing::Point(326, 369);
+			this->label7->Location = System::Drawing::Point(326, 398);
 			this->label7->Name = L"label7";
 			this->label7->Size = System::Drawing::Size(436, 25);
 			this->label7->TabIndex = 27;
@@ -877,7 +874,7 @@ namespace DictionaryCore {
 				static_cast<System::Byte>(0)));
 			this->validate_time->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(15)), static_cast<System::Int32>(static_cast<System::Byte>(190)), 
 				static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			this->validate_time->Location = System::Drawing::Point(422, 202);
+			this->validate_time->Location = System::Drawing::Point(422, 217);
 			this->validate_time->Name = L"validate_time";
 			this->validate_time->Size = System::Drawing::Size(223, 68);
 			this->validate_time->TabIndex = 29;
@@ -892,7 +889,7 @@ namespace DictionaryCore {
 				static_cast<System::Byte>(0)));
 			this->validate_run->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(15)), static_cast<System::Int32>(static_cast<System::Byte>(190)), 
 				static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			this->validate_run->Location = System::Drawing::Point(421, 94);
+			this->validate_run->Location = System::Drawing::Point(421, 109);
 			this->validate_run->Name = L"validate_run";
 			this->validate_run->Size = System::Drawing::Size(232, 124);
 			this->validate_run->TabIndex = 30;
@@ -903,10 +900,9 @@ namespace DictionaryCore {
 			// 
 			this->pictureBox5->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->pictureBox5->BackgroundImage = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox5.BackgroundImage")));
-			this->pictureBox5->Enabled = false;
 			this->pictureBox5->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox5.Image")));
 			this->pictureBox5->InitialImage = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox5.InitialImage")));
-			this->pictureBox5->Location = System::Drawing::Point(185, -82);
+			this->pictureBox5->Location = System::Drawing::Point(185, -67);
 			this->pictureBox5->Name = L"pictureBox5";
 			this->pictureBox5->Size = System::Drawing::Size(707, 528);
 			this->pictureBox5->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
@@ -1292,6 +1288,8 @@ namespace DictionaryCore {
 		//Config//
 		ConfigManager* cM;
 
+		//Dictionary API//
+		DictionaryApi^ daapi;		
 #pragma endregion
 
 #pragma region OnFormLoad
@@ -1318,6 +1316,9 @@ namespace DictionaryCore {
 
 			//Init ConfigManager - Read conf.json, Store FileNames//
 			cM = new ConfigManager();
+
+			//Init DictionaryApi - Create WebClient Add API Headers//
+			daapi = gcnew DictionaryApi();
 
 			//Show Loaded Files in Settings Tab//
 			LoadFileList();
@@ -1627,13 +1628,14 @@ namespace DictionaryCore {
 			AddWord^ ToAdd = gcnew AddWord();
 			string wname = Ut::FromStringHat(add_name->Text->Trim());
 			string wdefinition = Ut::FromStringHat(add_definition->Text->Trim());
-			if(regex_match(wname,regex("^[A-z]$")))
+			if(!regex_match(wname,regex("^[A-z]+$")) || !regex_match(wdefinition,regex(".+")))
 			{
-				MessageBox::Show("Invalid Word Name");
+				Ut::Error("Invalid Word Name/Definition");
 				return;
 			}
 			ToAdd->word = new Word(wname,wdefinition,PoSList());
 			thread->Start(ToAdd);
+			SkipNext();
 		}
 		void AddThread(Object^ word) { 
 
@@ -1724,11 +1726,13 @@ namespace DictionaryCore {
 				if(!tovalidate->Contains(","))
 				{
 					UpdateTextBox(add_name,tovalidate);
+					UpdateTextBox(add_definition,daapi->GetSampleDefinition(tovalidate));
 					UpdateTrigger("",false,skip_run);
 				}
 				else
 				{
 					UpdateTextBox(add_name,tovalidate->Split(',')[0]);
+					UpdateTextBox(add_definition,daapi->GetSampleDefinition(tovalidate->Split(',')[0]));
 					tovalidateindextotal = tovalidate->Split(',')->Length;
 					tovalidateindex = 1;
 					UpdateTrigger("",true,skip_run);
@@ -1738,11 +1742,19 @@ namespace DictionaryCore {
 			OperationInProgress = false;
 		}
 		System::Void skip_run_Click(System::Object^  sender, System::EventArgs^  e) {
+			SkipNext();
+		}
+		void SkipNext()
+		{
+			if(tovalidateindextotal == 0)
+				return;
 			add_name->Text = tovalidate->Split(',')[tovalidateindex];
+			UpdateTextBox(add_definition,daapi->GetSampleDefinition(tovalidate->Split(',')[tovalidateindex]));
 			tovalidateindex++;
 			if(tovalidateindex == tovalidateindextotal)
 			{
 				skip_run->Enabled = false;
+				tovalidateindextotal = 0;
 				return;
 			}
 		}

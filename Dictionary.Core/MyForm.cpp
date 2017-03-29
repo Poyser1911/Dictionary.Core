@@ -1,4 +1,5 @@
 #include "MyForm.h"
+#include "Api.h"
 using namespace System;
 using namespace System::Windows::Forms;
 
@@ -10,7 +11,6 @@ void main() {
 	Application::SetCompatibleTextRenderingDefault(false);
 	DictionaryCore::MyForm form;
 	//form.ShowDialog();
-
 	//Opens Form GUI
 	Application::Run(%form);
 

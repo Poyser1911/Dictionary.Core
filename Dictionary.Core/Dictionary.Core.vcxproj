@@ -79,6 +79,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Api.h" />
     <ClInclude Include="ConfigManager.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="LinkedList.h" />

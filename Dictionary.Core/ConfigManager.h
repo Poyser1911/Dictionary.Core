@@ -8,17 +8,30 @@
 using namespace rapidjson;
 using namespace std;
 using namespace System::IO;
+using namespace System;
 class ConfigManager
 {
 private:
 	string filename;
 	Document doc;
 	int NumOfFiles;
-	//"C:\\sample\\conf.json"
 public:
-	ConfigManager(string filename = "conf.json")
+	ConfigManager(String^ filename = "conf.json")
 	{
-		this->filename = filename;
+		//Prevent / and \ confusion//
+		//Prevent searching else-where when debugging//
+		if(!filename->Replace('/','\\')->Contains("\\"))
+			filename = System::AppDomain::CurrentDomain->BaseDirectory+"/"+filename;
+
+		if(!File::Exists(filename))
+		{
+			if(Ut::Info("Configuration File Not Found, Create now?",System::Windows::Forms::MessageBoxButtons::OKCancel) == System::Windows::Forms::DialogResult::OK)
+				File::WriteAllText(filename,"{\"filenames\":[]}");
+			else
+				System::Environment::Exit(1);
+		}
+
+		this->filename = Ut::FromStringHat(filename);
 		NumOfFiles = 0;
 		Reload();
 	}
