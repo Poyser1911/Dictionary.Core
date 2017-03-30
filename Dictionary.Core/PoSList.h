@@ -2,6 +2,8 @@
 #define PoSList_h
 
 #include "PartofSpeach.h"
+#include <regex>
+
 class PoSList 
 {
 private:
@@ -11,6 +13,10 @@ public:
 	PoSList()
 	{
 		head = NULL;
+	}
+	PoSList(PartofSpeach* head)
+	{
+		this->head = head;
 	}
 	void AddPoS(string PoS)
 	{
@@ -22,6 +28,27 @@ public:
 		}
 		else
 			head = temp;
+	}
+	static PoSList GetPoSList(string text)
+	{
+		smatch match;
+		PartofSpeach* head = NULL;
+		PartofSpeach* temp;
+		while(regex_search(text,match,regex("[a-z]+\\.")))
+		{
+			if(head != NULL)
+			{
+				temp->SetNextNode(new PartofSpeach(match[0]));
+				temp = temp->GetNextNode();
+			}
+			else
+			{
+				head = new PartofSpeach(match[0]);
+				temp = head;
+			}
+			text = match.suffix().str();
+		}
+		return PoSList(head);
 	}
 	string ToString()
 	{

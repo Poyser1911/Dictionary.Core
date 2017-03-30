@@ -11,6 +11,7 @@ Dictionary.Core/Debug/
 Dictionary.Core/Release/
 *.opensdf
 *.sdf
+*.suo
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 

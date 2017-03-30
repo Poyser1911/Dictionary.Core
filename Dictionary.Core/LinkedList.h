@@ -2,9 +2,9 @@
 #define LinkedList_h
 
 #include <fstream>
-
 #include "Word.h"
 #include "ResultSet.h"
+#include "BinaryTree.h"
 #include "rapidjson/document.h"
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
@@ -188,28 +188,28 @@ namespace DictionaryCore {
 		ResultSet<Word> AddWord(Word word, bool AutoSort)
 		{
 			ResultSet<Word> result;
-			string wordname = Ut::ToLower(word.GetName());
-			if(FindWord(wordname).result.GetName() != "")
+			ResultSet<Word> findresult = FindWord(word.GetName());
+			if(findresult.result.GetName() == "")
+				Insert(word);
+
+			result.Stop();
+			result.result.SetName(findresult.result.GetName());
+			return result;
+
+		}
+		void Insert(Word w, bool AutoSort = false)
+		{
+			if(head == NULL)
+				head = new Word(w);
+			else
 			{
-				result.result.SetName("");
-				return result;
-			}
-			result.Setresult(word);
-			if(head != NULL)
-			{
-				Word* temp = new Word(word);
+				Word* temp = new Word(w);
 				temp->SetNextNode(head);
 				head = temp;
 
 				if(AutoSort)
 					Sort();
 			}
-			else
-				head = new Word(word);
-
-			result.Stop();
-			return result;
-
 		}
 		ResultSet<string> ValidateSentence(string sentence)
 		{

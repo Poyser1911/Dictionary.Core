@@ -80,6 +80,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Api.h" />
+    <ClInclude Include="BinaryTree.h" />
     <ClInclude Include="ConfigManager.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="MainForm.h">
@@ -89,12 +90,16 @@
     <ClInclude Include="Node.h" />
     <ClInclude Include="PartofSpeach.h" />
     <ClInclude Include="PoSList.h" />
+    <ClInclude Include="PSelectorWindow.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="ResultSet.h" />
     <ClInclude Include="Ut.h" />
     <ClInclude Include="Word.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainForm.cpp" />
+    <ClCompile Include="PSelectorWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -106,6 +111,9 @@
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PSelectorWindow.resx">
+      <DependentUpon>PSelectorWindow.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
