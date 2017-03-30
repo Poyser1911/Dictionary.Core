@@ -1,5 +1,6 @@
 #include "MainForm.h"
 
+[STAThread]
 void main() {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
