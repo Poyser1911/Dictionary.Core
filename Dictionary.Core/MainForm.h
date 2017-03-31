@@ -232,7 +232,7 @@ namespace DictionaryCore {
 				 this->TabControl->Controls->Add(this->tabPage5);
 				 this->TabControl->Controls->Add(this->tabPage6);
 				 this->TabControl->Controls->Add(this->tabPage7);
-				// this->TabControl->Controls->Add(this->tabPage8);
+				 // this->TabControl->Controls->Add(this->tabPage8);
 				 this->TabControl->ItemSize = System::Drawing::Size(0, 20);
 				 this->TabControl->Location = System::Drawing::Point(0, 31);
 				 this->TabControl->Name = L"TabControl";
@@ -1636,6 +1636,8 @@ namespace DictionaryCore {
 			 {
 				 if(!CheckUp())
 					 return;
+
+
 				 Thread^ thread = gcnew Thread( gcnew ParameterizedThreadStart( this, &MainForm::AddThread ) );
 				 AddWord^ ToAdd = gcnew AddWord();
 				 string wname = Ut::FromStringHat(add_name->Text->Trim());
@@ -1646,10 +1648,10 @@ namespace DictionaryCore {
 					 Ut::Error("Invalid Word Name/Definition");
 					 return;
 				 }
-					
+
 				 ToAdd->word = new Word(wname,wdefinition,PoSList::GetPoSList(Ut::FromStringHat(add_pos_string->Text)));
 				 thread->Start(ToAdd);
-
+				 add_pos_string->Text = "";
 				 //Try Skip - For Vadidation//
 				 SkipNext();
 			 }
@@ -1690,8 +1692,13 @@ namespace DictionaryCore {
 			 }
 			 Void AddSelected(System::String^ pos)
 			 {
-				 if(!this->add_pos_string->Text->Contains(pos))
-					 this->add_pos_string->Text += " "+pos;
+				 if(!this->add_pos_string->Text->Contains(" "+pos+" "))
+					 this->add_pos_string->Text += " "+pos+" ";
+				 else
+					 this->add_pos_string->Text = this->add_pos_string->Text->Replace(" "+pos+" "," ");
+
+				 this->add_pos_string->Text = this->add_pos_string->Text->Replace("  "," ");
+
 			 }
 #pragma endregion
 
