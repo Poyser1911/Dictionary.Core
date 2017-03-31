@@ -101,11 +101,30 @@ namespace DictionaryCore {
 			str.SetString(Ut::FromStringHat(filename).c_str(), doc.GetAllocator());
 			filenames.PushBack(str, doc.GetAllocator()); 
 			NumOfFiles++;
+			Save();
+		}
+		void RemoveFileNameAt(int index)
+		{
+			if(index != NumOfFiles-1)
+			{
+				int x = 0;
+				Value& filenames = doc["filenames"];
+				for(int i=0;i<NumOfFiles;i++)
+				{
+					if(i != index)
+					{
+						filenames[x].SetString(filenames[i].GetString(),doc.GetAllocator());
+						x++;
+					}
+
+				}
+			}
+			doc["filenames"].PopBack();
+			NumOfFiles--;
+			Save();
 		}
 		void Save()
 		{
-			if(NumOfFiles == 0)
-				return;
 			StringBuffer buffer;
 			Writer<StringBuffer> writer(buffer);
 			doc.Accept(writer);

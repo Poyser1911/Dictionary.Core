@@ -77,14 +77,17 @@ namespace DictionaryCore {
 			this->ClientSize = System::Drawing::Size(345, 526);
 			this->Controls->Add(this->done);
 			this->Controls->Add(this->pos_selection_list);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
 			this->Name = L"PSelectorWindow";
+			this->SizeGripStyle = System::Windows::Forms::SizeGripStyle::Hide;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Text = L"Part of Speach Modifiers";
 			this->Load += gcnew System::EventHandler(this, &PSelectorWindow::PSelectorWindow_Load);
 			this->ResumeLayout(false);
+
 		}
 #pragma endregion
 

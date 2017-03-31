@@ -119,7 +119,6 @@ namespace DictionaryCore {
 			 /// </summary>
 
 #pragma endregion
-
 #pragma region For Windows Form Designer, modify too much = no designer editor
 			 void InitializeComponent(void)
 			 {
@@ -232,7 +231,6 @@ namespace DictionaryCore {
 				 this->TabControl->Controls->Add(this->tabPage5);
 				 this->TabControl->Controls->Add(this->tabPage6);
 				 this->TabControl->Controls->Add(this->tabPage7);
-				 // this->TabControl->Controls->Add(this->tabPage8);
 				 this->TabControl->ItemSize = System::Drawing::Size(0, 20);
 				 this->TabControl->Location = System::Drawing::Point(0, 31);
 				 this->TabControl->Name = L"TabControl";
@@ -297,7 +295,7 @@ namespace DictionaryCore {
 				 // pictureBox2
 				 // 
 				 this->pictureBox2->Anchor = System::Windows::Forms::AnchorStyles::None;
-				 this->pictureBox2->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox2.Image")));
+				 this->pictureBox2->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox1.Image")));
 				 this->pictureBox2->InitialImage = nullptr;
 				 this->pictureBox2->Location = System::Drawing::Point(185, -67);
 				 this->pictureBox2->Name = L"pictureBox2";
@@ -516,7 +514,7 @@ namespace DictionaryCore {
 				 // pictureBox3
 				 // 
 				 this->pictureBox3->Anchor = System::Windows::Forms::AnchorStyles::None;
-				 this->pictureBox3->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox3.Image")));
+				 this->pictureBox3->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox1.Image")));
 				 this->pictureBox3->InitialImage = nullptr;
 				 this->pictureBox3->Location = System::Drawing::Point(185, -67);
 				 this->pictureBox3->Name = L"pictureBox3";
@@ -719,7 +717,7 @@ namespace DictionaryCore {
 				 // pictureBox4
 				 // 
 				 this->pictureBox4->Anchor = System::Windows::Forms::AnchorStyles::None;
-				 this->pictureBox4->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox4.Image")));
+				 this->pictureBox4->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox1.Image")));
 				 this->pictureBox4->InitialImage = nullptr;
 				 this->pictureBox4->Location = System::Drawing::Point(185, -67);
 				 this->pictureBox4->Name = L"pictureBox4";
@@ -906,7 +904,7 @@ namespace DictionaryCore {
 				 // pictureBox5
 				 // 
 				 this->pictureBox5->Anchor = System::Windows::Forms::AnchorStyles::None;
-				 this->pictureBox5->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox5.Image")));
+				 this->pictureBox5->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox1.Image")));
 				 this->pictureBox5->InitialImage = nullptr;
 				 this->pictureBox5->Location = System::Drawing::Point(185, -67);
 				 this->pictureBox5->Name = L"pictureBox5";
@@ -1312,6 +1310,7 @@ namespace DictionaryCore {
 				 //Init Menu Items//
 				 LinkedListItem = gcnew ToolStripMenuItem();
 				 BinaryTreeItem = gcnew ToolStripMenuItem();
+
 				 //Init Menu Items - Set Text,Attach Event, Add to Menu Dropdown//
 				 InitDSItem(LinkedListItem,L"Linked List");
 				 InitDSItem(BinaryTreeItem,L"Binary Tree");
@@ -1354,6 +1353,8 @@ namespace DictionaryCore {
 				 this->validate_run->Click += gcnew System::EventHandler(this, &MainForm::Run_Validate);
 				 this->validate_box->KeyUp += gcnew System::Windows::Forms::KeyEventHandler(this, &MainForm::ValidateBoxOnEnterPressed);
 				 this->validate_box->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainForm::SupressEnter);
+
+				 this->add_pos_string->Text = "[ ]";
 			 }
 			 void InitDSItem(ToolStripMenuItem^ item, String^ text)
 			 {
@@ -1697,8 +1698,9 @@ namespace DictionaryCore {
 				 else
 					 this->add_pos_string->Text = this->add_pos_string->Text->Replace(" "+pos+" "," ");
 
-				 this->add_pos_string->Text = this->add_pos_string->Text->Replace("  "," ");
+				 this->add_pos_string->Text = this->add_pos_string->Text->Replace("  "," ")->Replace("]","");
 
+				 this->add_pos_string->Text += "]";
 			 }
 #pragma endregion
 
@@ -1803,12 +1805,26 @@ namespace DictionaryCore {
 #pragma region Settings
 			 void LoadFileList()
 			 {
+				  System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
 				 Value& filenames = cM->GetFileNames();
 				 for(int i=0;i<cM->GetNumOFFiles();i++)
 					 setting_filelistbox->Items->Add(Ut::ToStringHat(filenames[i].GetString()));
-			 }
 
-			 System::Void setting_addfile_run_Click(System::Object^  sender, System::EventArgs^  e) {			AddFile(setting_filename_box->Text);
+				 setting_filelistbox->ContextMenuStrip = gcnew System::Windows::Forms::ContextMenuStrip();
+				 setting_filelistbox->ContextMenuStrip->Items->Add("Remove",(cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"remove.Image"))), gcnew EventHandler(this,&MainForm::TryRemoveSelected));
+			 }
+			 void TryRemoveSelected(Object^ o,EventArgs^ e)
+			 {
+				 if(setting_filelistbox->SelectedIndex <= -1)
+					 return;
+
+				 cM->RemoveFileNameAt(setting_filelistbox->SelectedIndex);
+				 setting_filelistbox->Items->RemoveAt(setting_filelistbox->SelectedIndex);
+
+			 }
+			 System::Void setting_addfile_run_Click(System::Object^  sender, System::EventArgs^  e)
+			 {
+				 AddFile(setting_filename_box->Text);
 			 }
 			 void AddFile(String^ filename)
 			 {
@@ -1819,7 +1835,6 @@ namespace DictionaryCore {
 				 }
 
 				 cM->AddFileName(filename);
-				 cM->Save();
 				 setting_filelistbox->Items->Add(filename);
 			 }
 			 System::Void setting_browse_run_Click(System::Object^  sender, System::EventArgs^  e) {
