@@ -3,8 +3,8 @@
 
 namespace DictionaryCore {
 #define BASEURL "https://od-api.oxforddictionaries.com/api/v1"
-#define APPID "8aebb444"
-#define APIKEY "eee88b67d11cce72ca2d782fe55c491a"
+#define APPID "[YOUR APP ID HERE]"
+#define APIKEY "[YOUR API KEY HERE]"
 #define LANG "en"
 
 	using namespace System::Net;
