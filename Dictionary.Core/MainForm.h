@@ -1,6 +1,7 @@
 #pragma once
 
 #include <time.h>
+#include <regex>
 #include "Ut.h"
 #include "LinkedList.h"
 #include "BinaryTree.h"
@@ -113,12 +114,16 @@ namespace DictionaryCore {
 		System::Windows::Forms::Label^  setting_browse_run;
 		System::Windows::Forms::Label^  label8;
 	private: System::Windows::Forms::Label^  add_pos_string;
+	private: System::Windows::Forms::Label^  label9;
+	private: System::Windows::Forms::TextBox^  view_filter_box;
+	private: System::Windows::Forms::CheckBox^  startwith;
 			 System::ComponentModel::IContainer^  components;
 			 /// <summary>
 			 /// Required designer variable.
 			 /// </summary>
 
 #pragma endregion
+
 #pragma region For Windows Form Designer, modify too much = no designer editor
 			 void InitializeComponent(void)
 			 {
@@ -162,6 +167,9 @@ namespace DictionaryCore {
 				 this->label13 = (gcnew System::Windows::Forms::Label());
 				 this->pictureBox4 = (gcnew System::Windows::Forms::PictureBox());
 				 this->tabPage5 = (gcnew System::Windows::Forms::TabPage());
+				 this->startwith = (gcnew System::Windows::Forms::CheckBox());
+				 this->label9 = (gcnew System::Windows::Forms::Label());
+				 this->view_filter_box = (gcnew System::Windows::Forms::TextBox());
 				 this->wordout_box = (gcnew System::Windows::Forms::RichTextBox());
 				 this->label6 = (gcnew System::Windows::Forms::Label());
 				 this->view_time = (gcnew System::Windows::Forms::Label());
@@ -295,7 +303,7 @@ namespace DictionaryCore {
 				 // pictureBox2
 				 // 
 				 this->pictureBox2->Anchor = System::Windows::Forms::AnchorStyles::None;
-				 this->pictureBox2->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox1.Image")));
+				 this->pictureBox2->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"startgif")));
 				 this->pictureBox2->InitialImage = nullptr;
 				 this->pictureBox2->Location = System::Drawing::Point(185, -67);
 				 this->pictureBox2->Name = L"pictureBox2";
@@ -363,7 +371,7 @@ namespace DictionaryCore {
 				 // pictureBox1
 				 // 
 				 this->pictureBox1->Anchor = System::Windows::Forms::AnchorStyles::None;
-				 this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox1.Image")));
+				 this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"startgif")));
 				 this->pictureBox1->InitialImage = nullptr;
 				 this->pictureBox1->Location = System::Drawing::Point(185, -67);
 				 this->pictureBox1->Name = L"pictureBox1";
@@ -514,7 +522,7 @@ namespace DictionaryCore {
 				 // pictureBox3
 				 // 
 				 this->pictureBox3->Anchor = System::Windows::Forms::AnchorStyles::None;
-				 this->pictureBox3->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox1.Image")));
+				 this->pictureBox3->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"startgif")));
 				 this->pictureBox3->InitialImage = nullptr;
 				 this->pictureBox3->Location = System::Drawing::Point(185, -67);
 				 this->pictureBox3->Name = L"pictureBox3";
@@ -717,7 +725,7 @@ namespace DictionaryCore {
 				 // pictureBox4
 				 // 
 				 this->pictureBox4->Anchor = System::Windows::Forms::AnchorStyles::None;
-				 this->pictureBox4->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox1.Image")));
+				 this->pictureBox4->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"startgif")));
 				 this->pictureBox4->InitialImage = nullptr;
 				 this->pictureBox4->Location = System::Drawing::Point(185, -67);
 				 this->pictureBox4->Name = L"pictureBox4";
@@ -729,6 +737,9 @@ namespace DictionaryCore {
 				 // tabPage5
 				 // 
 				 this->tabPage5->BackColor = System::Drawing::Color::White;
+				 this->tabPage5->Controls->Add(this->startwith);
+				 this->tabPage5->Controls->Add(this->label9);
+				 this->tabPage5->Controls->Add(this->view_filter_box);
 				 this->tabPage5->Controls->Add(this->wordout_box);
 				 this->tabPage5->Controls->Add(this->label6);
 				 this->tabPage5->Controls->Add(this->view_time);
@@ -741,6 +752,46 @@ namespace DictionaryCore {
 				 this->tabPage5->Size = System::Drawing::Size(1120, 599);
 				 this->tabPage5->TabIndex = 3;
 				 this->tabPage5->Text = L"View";
+				 // 
+				 // startwith
+				 // 
+				 this->startwith->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+				 this->startwith->AutoSize = true;
+				 this->startwith->Checked = true;
+				 this->startwith->CheckState = System::Windows::Forms::CheckState::Checked;
+				 this->startwith->Font = (gcnew System::Drawing::Font(L"Comic Sans MS", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+					 static_cast<System::Byte>(0)));
+				 this->startwith->Location = System::Drawing::Point(1017, 15);
+				 this->startwith->Name = L"startwith";
+				 this->startwith->Size = System::Drawing::Size(92, 22);
+				 this->startwith->TabIndex = 37;
+				 this->startwith->Text = L"Start With";
+				 this->startwith->UseVisualStyleBackColor = true;
+				 // 
+				 // label9
+				 // 
+				 this->label9->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+				 this->label9->Font = (gcnew System::Drawing::Font(L"Komika Axis", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+					 static_cast<System::Byte>(0)));
+				 this->label9->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(15)), static_cast<System::Int32>(static_cast<System::Byte>(190)), 
+					 static_cast<System::Int32>(static_cast<System::Byte>(255)));
+				 this->label9->Location = System::Drawing::Point(636, 10);
+				 this->label9->Name = L"label9";
+				 this->label9->Size = System::Drawing::Size(75, 28);
+				 this->label9->TabIndex = 36;
+				 this->label9->Text = L"Filter:";
+				 // 
+				 // view_filter_box
+				 // 
+				 this->view_filter_box->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+				 this->view_filter_box->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+				 this->view_filter_box->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+					 static_cast<System::Byte>(0)));
+				 this->view_filter_box->Location = System::Drawing::Point(717, 10);
+				 this->view_filter_box->Name = L"view_filter_box";
+				 this->view_filter_box->Size = System::Drawing::Size(287, 29);
+				 this->view_filter_box->TabIndex = 35;
+				 this->view_filter_box->WordWrap = false;
 				 // 
 				 // wordout_box
 				 // 
@@ -904,7 +955,7 @@ namespace DictionaryCore {
 				 // pictureBox5
 				 // 
 				 this->pictureBox5->Anchor = System::Windows::Forms::AnchorStyles::None;
-				 this->pictureBox5->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox1.Image")));
+				 this->pictureBox5->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"startgif")));
 				 this->pictureBox5->InitialImage = nullptr;
 				 this->pictureBox5->Location = System::Drawing::Point(185, -67);
 				 this->pictureBox5->Name = L"pictureBox5";
@@ -1253,6 +1304,7 @@ namespace DictionaryCore {
 				 this->tabPage4->PerformLayout();
 				 (cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->pictureBox4))->EndInit();
 				 this->tabPage5->ResumeLayout(false);
+				 this->tabPage5->PerformLayout();
 				 this->tabPage6->ResumeLayout(false);
 				 this->tabPage6->PerformLayout();
 				 (cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->pictureBox5))->EndInit();
@@ -1284,6 +1336,7 @@ namespace DictionaryCore {
 			 String^ tovalidate;
 			 int tovalidateindex;
 			 int tovalidateindextotal;
+			 String^ allwords;
 
 			 //Config//
 			 ConfigManager* cM;
@@ -1333,33 +1386,35 @@ namespace DictionaryCore {
 				 //Used to track words to be added after vaidation//
 				 tovalidateindex = 0;
 				 tovalidateindextotal = 0;
+				 allwords = "";
 
 				 //Add Main Events Handlers//
-				 this->parse_run->Click += gcnew System::EventHandler(this, &MainForm::Run_Parse);
+				 this->parse_run->Click += gcnew EventHandler(this, &MainForm::Run_Parse);
 
-				 this->sort_run->Click += gcnew System::EventHandler(this, &MainForm::Run_Sort);
+				 this->sort_run->Click += gcnew EventHandler(this, &MainForm::Run_Sort);
 
-				 this->search_run->Click += gcnew System::EventHandler(this, &MainForm::Run_Search);
-				 this->search_box->KeyUp += gcnew System::Windows::Forms::KeyEventHandler(this, &MainForm::SearchBoxOnEnterPressed);
-				 this->search_box->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainForm::SupressEnter);
+				 this->search_run->Click += gcnew EventHandler(this, &MainForm::Run_Search);
+				 this->search_box->KeyUp += gcnew KeyEventHandler(this, &MainForm::SearchBoxOnEnterPressed);
+				 this->search_box->KeyDown += gcnew KeyEventHandler(this, &MainForm::SupressEnter);
 
-				 this->add_run->Click += gcnew System::EventHandler(this, &MainForm::Run_Add);
-				 this->add_definition->KeyUp += gcnew System::Windows::Forms::KeyEventHandler(this, &MainForm::DefinitionBoxOnEnterPressed);
-				 this->add_definition->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainForm::SupressEnter);
-				 this->pos_selector_run->Click += gcnew System::EventHandler(this, &MainForm::OpenSelector);
+				 this->add_run->Click += gcnew EventHandler(this, &MainForm::Run_Add);
+				 this->add_definition->KeyUp += gcnew KeyEventHandler(this, &MainForm::DefinitionBoxOnEnterPressed);
+				 this->add_definition->KeyDown += gcnew KeyEventHandler(this, &MainForm::SupressEnter);
+				 this->pos_selector_run->Click += gcnew EventHandler(this, &MainForm::OpenSelector);
 
-				 this->view_run->Click += gcnew System::EventHandler(this, &MainForm::Run_Display);
+				 this->view_run->Click += gcnew EventHandler(this, &MainForm::Run_Display);
+				 this->view_filter_box->KeyUp += gcnew KeyEventHandler(this, &MainForm::TryFilter);
 
-				 this->validate_run->Click += gcnew System::EventHandler(this, &MainForm::Run_Validate);
-				 this->validate_box->KeyUp += gcnew System::Windows::Forms::KeyEventHandler(this, &MainForm::ValidateBoxOnEnterPressed);
-				 this->validate_box->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainForm::SupressEnter);
+				 this->validate_run->Click += gcnew EventHandler(this, &MainForm::Run_Validate);
+				 this->validate_box->KeyUp += gcnew KeyEventHandler(this, &MainForm::ValidateBoxOnEnterPressed);
+				 this->validate_box->KeyDown += gcnew KeyEventHandler(this, &MainForm::SupressEnter);
 
 				 this->add_pos_string->Text = "[ ]";
 			 }
 			 void InitDSItem(ToolStripMenuItem^ item, String^ text)
 			 {
 				 item->Text = text;
-				 item->Click += gcnew System::EventHandler(this, &MainForm::DS_SelectionChanged);
+				 item->Click += gcnew EventHandler(this, &MainForm::DS_SelectionChanged);
 
 				 //Add To dropdown List//
 				 this->ds_selector->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {item});
@@ -1371,10 +1426,12 @@ namespace DictionaryCore {
 				 if(item->Text == "Linked List")
 				 {
 					 BinaryTreeItem->Checked = false;
+					 //Enable Sort Page
 					 tabPage2->Enabled = true;
 				 }
 				 else
 				 {
+					 //Disable Sort Page
 					 tabPage2->Enabled = false;
 					 LinkedListItem->Checked = false;
 				 }
@@ -1474,18 +1531,22 @@ namespace DictionaryCore {
 				 }
 				 return false;
 			 }
-			 bool IsSelectDataStuctureLoaded()
+			 bool IsSelectDataStuctureLoaded(bool notify)
 			 {
 				 if(LinkedListItem->Checked)
-				 {
-					 if(!list->IsLoaded)
-						 return NotifyLoadFor(LinkedListItem->Text);
-				 }
-				 else if(BinaryTreeItem->Checked)
-					 if(!tree->IsLoaded)
-						 return NotifyLoadFor(BinaryTreeItem->Text);
+					 if(list->IsLoaded)
+						 return true;
 
-				 return true;
+				 if(BinaryTreeItem->Checked)
+					 if(tree->IsLoaded)
+						 return true;
+
+				 if(notify)
+					 if(LinkedListItem->Checked)
+						 return NotifyLoadFor(LinkedListItem->Text);
+					 else if(BinaryTreeItem->Checked)
+						 return NotifyLoadFor(BinaryTreeItem->Text);
+				 return false;
 			 }
 			 bool NotifyLoadFor(String^ ds)
 			 {
@@ -1497,7 +1558,7 @@ namespace DictionaryCore {
 			 {
 				 if(IsOperationInProgress())
 					 return false;
-				 if(!IsSelectDataStuctureLoaded())
+				 if(!IsSelectDataStuctureLoaded(true))
 					 return false;
 				 return true;
 			 }
@@ -1713,8 +1774,7 @@ namespace DictionaryCore {
 			 {
 				 if(!CheckUp())
 					 return;
-				 Thread^ thread = gcnew Thread( gcnew ThreadStart( this, &MainForm::DisplayThread ) );
-				 AddWord^ ToAdd = gcnew AddWord();
+				 Thread^ thread = gcnew Thread(gcnew ThreadStart(this, &MainForm::DisplayThread));
 				 thread->Start();
 			 }
 			 void DisplayThread() { 
@@ -1730,7 +1790,41 @@ namespace DictionaryCore {
 				 }
 				 thread3->Abort();
 				 UpdateRichTextBox(wordout_box,result);
+				 allwords = result;
 				 OperationInProgress = false;
+			 }
+			 void TryFilter(Object^ sender, KeyEventArgs^ e)
+			 {
+				 //Check If Enter key pressed
+				 if(e->KeyData != Keys::Enter)
+					 return;
+
+				 String^ filertext = view_filter_box->Text->Trim()->ToLower();
+				 if(allwords == "")
+					 return;
+				 if(view_filter_box->Text->Trim() == "")
+				 {
+					 wordout_box->Text = allwords;
+					 return;
+				 }
+				 String^ result = "";
+				 array<String^>^ lines = allwords->Split('\n');
+				 String^ wordname;
+				 for(int i=0;i<lines->Length;i++)
+				 {
+					 wordname = Word::GetWordName(Ut::FromStringHat(lines[i]))->ToLower();
+					 if(startwith->Checked)
+					 {
+						if(!wordname->StartsWith(filertext))
+							continue;
+					 }
+					 else
+						  if(!wordname->Contains(filertext))
+							  continue;
+
+					 result += lines[i]+"\n";
+				 }
+				 wordout_box->Text = result;
 			 }
 #pragma endregion
 
@@ -1805,13 +1899,13 @@ namespace DictionaryCore {
 #pragma region Settings
 			 void LoadFileList()
 			 {
-				  System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
+				 System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
 				 Value& filenames = cM->GetFileNames();
 				 for(int i=0;i<cM->GetNumOFFiles();i++)
 					 setting_filelistbox->Items->Add(Ut::ToStringHat(filenames[i].GetString()));
 
 				 setting_filelistbox->ContextMenuStrip = gcnew System::Windows::Forms::ContextMenuStrip();
-				 setting_filelistbox->ContextMenuStrip->Items->Add("Remove",(cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"remove.Image"))), gcnew EventHandler(this,&MainForm::TryRemoveSelected));
+				 setting_filelistbox->ContextMenuStrip->Items->Add("Remove",(System::Drawing::Image^)resources->GetObject(L"remove.Image"), gcnew EventHandler(this,&MainForm::TryRemoveSelected));
 			 }
 			 void TryRemoveSelected(Object^ o,EventArgs^ e)
 			 {
@@ -1830,7 +1924,7 @@ namespace DictionaryCore {
 			 {
 				 if(!File::Exists(filename))
 				 {
-					 System::Windows::Forms::MessageBox::Show("Filename Does not exist","Error");
+					 Ut::Error("Filename Does not exist");
 					 return;
 				 }
 

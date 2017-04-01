@@ -75,29 +75,35 @@ public:
 		Word word;
 		try
 		{
-		smatch match;
-		regex_search(line,match,regex("[A-z/]+"));
-		word.Name = match[0];
+			smatch match;
+			regex_search(line,match,regex("[A-z/]+"));
+			word.Name = match[0];
 
-		line = regex_replace(line,regex(word.Name),"",regex_constants::format_first_only);
+			line = regex_replace(line,regex(word.Name),"",regex_constants::format_first_only);
 
-		string de = line.substr(line.find_last_of('\t')+1,line.length());
-		regex_search(de,match,regex("[A-z].+"));
-		word.Definition = match[0];
-		string tempdefinition = word.Definition;
-		Ut::ReplaceAll(tempdefinition,string("("),"\\(");
-		Ut::ReplaceAll(tempdefinition,string(")"),"\\)");
-		line = regex_replace(line,regex(tempdefinition),"");
+			string de = line.substr(line.find_last_of('\t')+1,line.length());
+			regex_search(de,match,regex("[A-z].+"));
+			word.Definition = match[0];
+			string tempdefinition = word.Definition;
+			Ut::ReplaceAll(tempdefinition,string("("),"\\(");
+			Ut::ReplaceAll(tempdefinition,string(")"),"\\)");
+			line = regex_replace(line,regex(tempdefinition),"");
 
-		while(regex_search(line,match,regex("[a-z]+\\.")))
-		{
-			for(auto m : match)
-				word.PartofS.AddPoS(m);
-			line = match.suffix().str();
-		}
+			while(regex_search(line,match,regex("[a-z]+\\.")))
+			{
+				for(auto m : match)
+					word.PartofS.AddPoS(m);
+				line = match.suffix().str();
+			}
 		}
 		catch(exception) {}
 		return word;
+	}
+	static System::String^ GetWordName(string line)
+	{
+		smatch match;
+		regex_search(line,match,regex("[A-z/]+"));
+		return Ut::ToStringHat(((string)match[0]).c_str());
 	}
 };
 
